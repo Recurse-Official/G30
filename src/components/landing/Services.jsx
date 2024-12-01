@@ -1,5 +1,6 @@
 import React from "react";
 import { FaStethoscope, FaMicroscope, FaHeartbeat, FaDna } from "react-icons/fa";
+import BackgroundAnimation from "../../animations/BackgroundAnimation";
 
 const services = [
   {
@@ -36,9 +37,12 @@ const Services = () => {
   return (
     <section
       id="services"
-      className="py-16 bg-gradient-to-b from-blue-100 to-white text-center"
+      className="relative py-16 bg-gradient-to-b from-blue-100 to-white text-center overflow-hidden"
     >
-      <div className="max-w-7xl mx-auto px-6">
+      {/* Dynamic Grid Overlay */}
+      <BackgroundAnimation sectionId="services" />
+
+      <div className="relative z-10 max-w-7xl mx-auto px-6">
         <h2 className="text-4xl font-bold text-gray-800 mb-6">
           Our <span className="text-blue-600 font-cursive">Services</span>
         </h2>

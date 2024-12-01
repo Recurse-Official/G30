@@ -1,50 +1,63 @@
-// src/animations/BackgroundAnimation.jsx
-import React, { useState, useEffect } from "react";
-import { motion } from "framer-motion";
+import React, { useEffect, useState } from "react";
 
 const BackgroundAnimation = ({ sectionId }) => {
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
+  const gridSize = 20; // Adjust the number of grid items for density
 
   useEffect(() => {
-    const section = document.getElementById(sectionId);
-    if (!section) return;
-
     const handleMouseMove = (e) => {
-      const rect = section.getBoundingClientRect();
-      const x = e.clientX - rect.left;
-      const y = e.clientY - rect.top;
-      setMousePosition({ x, y });
+      setMousePosition({ x: e.clientX, y: e.clientY });
     };
 
-    section.addEventListener("mousemove", handleMouseMove);
+    window.addEventListener("mousemove", handleMouseMove);
     return () => {
-      section.removeEventListener("mousemove", handleMouseMove);
+      window.removeEventListener("mousemove", handleMouseMove);
     };
-  }, [sectionId]);
+  }, []);
+
+  const calculateOpacity = (gridX, gridY) => {
+    const distance = Math.sqrt(
+      Math.pow(mousePosition.x - gridX, 2) +
+      Math.pow(mousePosition.y - gridY, 2)
+    );
+    return distance < 200 ? 1 - distance / 200 : 0;
+  };
+
+  const createGrid = () => {
+    const gridItems = [];
+    const windowWidth = window.innerWidth;
+    const windowHeight = window.innerHeight;
+    const gridItemSize = 50; // Size of each grid item
+
+    for (let i = 0; i < Math.ceil(windowHeight / gridItemSize); i++) {
+      for (let j = 0; j < Math.ceil(windowWidth / gridItemSize); j++) {
+        const gridX = j * gridItemSize + gridItemSize / 2;
+        const gridY = i * gridItemSize + gridItemSize / 2;
+
+        gridItems.push(
+          <div
+            key={`${i}-${j}`}
+            className="absolute bg-blue-500 rounded-full"
+            style={{
+              width: "8px",
+              height: "8px",
+              left: `${gridX}px`,
+              top: `${gridY}px`,
+              opacity: calculateOpacity(gridX, gridY),
+            }}
+          />
+        );
+      }
+    }
+    return gridItems;
+  };
 
   return (
-    <div className="absolute inset-0 pointer-events-none z-0">
-      {[...Array(20)].map((_, row) =>
-        [...Array(20)].map((_, col) => {
-          const distance = Math.sqrt(
-            Math.pow(mousePosition.x - (col * 50 + 25), 2) +
-              Math.pow(mousePosition.y - (row * 50 + 25), 2)
-          );
-          const opacity = distance < 150 ? 1 - distance / 150 : 0;
-
-          return (
-            <motion.div
-              key={`${sectionId}-${row}-${col}`}
-              className="absolute w-2 h-2 bg-blue-300 rounded-full"
-              style={{
-                left: col * 50 + "px",
-                top: row * 50 + "px",
-                opacity,
-              }}
-            />
-          );
-        })
-      )}
+    <div
+      id={sectionId}
+      className="absolute inset-0 pointer-events-none"
+    >
+      {createGrid()}
     </div>
   );
 };
