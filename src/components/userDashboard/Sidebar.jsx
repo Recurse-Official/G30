@@ -1,44 +1,57 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import { FaUser, FaCalendarAlt, FaListAlt, FaUserMd, FaFileAlt } from "react-icons/fa";
 
 const Sidebar = () => {
   return (
-    <div className="w-64 bg-050c9c text-white min-h-screen flex flex-col">
-        <h2 className="text-2xl font-bold text-center text-white py-6">Dashboard</h2>
-        <nav className="flex-grow">
-        <ul className="space-y-4 px-6">
+    <aside className="w-64 bg-blue-600 text-white flex flex-col min-h-screen shadow-lg">
+      <h2 className="text-2xl font-bold p-6 text-center border-b border-blue-700">
+        Dashboard
+      </h2>
+      <nav className="flex-grow">
+        <ul className="space-y-2 p-4">
           <li>
-            <Link className="flex items-center gap-4 hover:text-a7e6ff transition" to="/personal-details">
-              <FaUser /> Personal Details
+            <Link
+              to="/dashboard/personal-details"
+              className="block px-4 py-2 rounded hover:bg-blue-500"
+            >
+              Personal Details
             </Link>
           </li>
           <li>
-            <Link className="flex items-center gap-4 hover:text-a7e6ff transition" to="/book-appointment">
-              <FaCalendarAlt /> Book Appointment
+            <Link
+              to="/dashboard/book-appointment"
+              className="block px-4 py-2 rounded hover:bg-blue-500"
+            >
+              Book Appointment
             </Link>
           </li>
           <li>
-            <Link className="flex items-center gap-4 hover:text-a7e6ff transition" to="/symptoms">
-              <FaListAlt /> Predictive Diagnosis
+            <Link
+              to="/dashboard/symptoms"
+              className="block px-4 py-2 rounded hover:bg-blue-500"
+            >
+              Symptoms
             </Link>
           </li>
           <li>
-            <Link className="flex items-center gap-4 hover:text-a7e6ff transition" to="/history">
-              <FaFileAlt /> History
+            <Link
+              to="/dashboard/connect-doctors"
+              className="block px-4 py-2 rounded hover:bg-blue-500"
+            >
+              Connect Doctors
             </Link>
           </li>
           <li>
-            <Link className="flex items-center gap-4 hover:text-a7e6ff transition" to="/connect-doctors">
-              <FaUserMd /> Connect Doctors
+            <Link
+              to="/dashboard/history"
+              className="block px-4 py-2 rounded hover:bg-blue-500"
+            >
+              History
             </Link>
           </li>
         </ul>
       </nav>
-      <footer className="text-center py-4 text-sm text-gray-400">
-        &copy; 2024 OmniFlux
-      </footer>
-    </div>
+    </aside>
   );
 };
 

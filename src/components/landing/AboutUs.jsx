@@ -25,7 +25,7 @@ const AboutUs = () => {
 
   return (
     <section id="about-us" className="relative py-16 bg-gradient-to-b from-white to-blue-50 text-center">
-      <BackgroundAnimation sectionId="about-us" />
+      <BackgroundAnimation sectionId="about-us" className="-z-100"/>
       <div className="z-10 max-w-7xl mx-auto px-6 lg:px-12">
         <h2 className="text-5xl font-bold text-blue-600 font-cursive mb-8">About Us</h2>
         <p className="text-2xl text-gray-700 mb-12">

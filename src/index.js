@@ -1,6 +1,6 @@
 import React from "react";
 import { createRoot } from "react-dom/client";
-import { BrowserRouter } from "react-router-dom";
+// import { BrowserRouter } from "react-router-dom";
 import App from "./App";
 import "./index.css";
 import { Auth0Provider } from "@auth0/auth0-react";
@@ -14,8 +14,9 @@ root.render(
     clientId="4Vvqd4ImcRhmARtgjG6wpZcICoiQH6aT"
     redirectUri = {window.location.origin + "/dashboard" }
   >
-    <BrowserRouter>
+     <App />
+    {/* <BrowserRouter>
       <App />
-    </BrowserRouter>
+    </BrowserRouter> */}
   </Auth0Provider>
 );

@@ -1,7 +1,8 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import axios from "axios";
 
+axios.defaults.baseURL = "http://localhost:8080";
 
 const PersonalDetails = () => {
   const [userInfo, setUserInfo] = useState({
@@ -14,24 +15,57 @@ const PersonalDetails = () => {
     height: "",
     gender: "",
     allergies: "",
-    pastIllnesses: "",
-    currentMedication: "",
+    illness: "",
+    medication: "",
   });
 
   const [isEditing, setIsEditing] = useState(true);
 
-  const handleInputChange = (e) => {
-    const { name, value } = e.target;
-    setUserInfo({ ...userInfo, [name]: value });
+  // Fetch user details based on email if already exists
+  const fetchUserDetails = async () => {
+    try {
+      const response = await axios.get(`/senddetails/${userInfo.email}`);
+      if (response.data.success) {
+        const user = response.data.data.find(
+          (user) => user.email === userInfo.email
+        );
+        if (user) {
+          setUserInfo(user);
+          setIsEditing(false);
+        }
+      }
+    } catch (error) {
+      console.error("Error fetching user details: ", error);
+    }
   };
 
-  const handleSave = () => {
-    setIsEditing(false);
+  // Save or update details in the database
+  const handleSave = async () => {
+    try {
+      const response = await axios.post("/personeldetail", userInfo);
+      console.log("Response: ", response.data);
+      alert("Details saved successfully!");
+      setIsEditing(false);
+    } catch (error) {
+      console.error("Error saving details: ", error);
+      alert("Failed to save details. Please try again.");
+    }
   };
 
   const handleEdit = () => {
     setIsEditing(true);
   };
+
+  // Handle input changes
+  const handleInputChange = (e) => {
+    const { name, value } = e.target;
+    setUserInfo({ ...userInfo, [name]: value });
+  };
+
+  // Automatically fetch details when the component is loaded if email is provided
+  useEffect(() => {
+    if (userInfo.email) fetchUserDetails();
+  }, [userInfo.email]);
 
   return (
     <div
@@ -122,7 +156,7 @@ const PersonalDetails = () => {
                   placeholder="Enter your city"
                   className="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
                 />
-            </div>
+              </div>
               <div>
                 <label className="block text-gray-700">Gender (M/F)</label>
                 <input
@@ -149,8 +183,8 @@ const PersonalDetails = () => {
             <div>
               <label className="block text-gray-700">Past Illnesses</label>
               <textarea
-                name="pastIllnesses"
-                value={userInfo.pastIllnesses}
+                name="illness"
+                value={userInfo.illness}
                 onChange={handleInputChange}
                 placeholder="Mention any past illnesses"
                 className="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
@@ -160,8 +194,8 @@ const PersonalDetails = () => {
             <div>
               <label className="block text-gray-700">Current Medication</label>
               <textarea
-                name="currentMedication"
-                value={userInfo.currentMedication}
+                name="medication"
+                value={userInfo.medication}
                 onChange={handleInputChange}
                 placeholder="Mention any ongoing medication"
                 className="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
@@ -179,17 +213,39 @@ const PersonalDetails = () => {
         ) : (
           <div>
             <div className="bg-gray-100 p-4 rounded-lg shadow-lg">
-              <p className="text-lg text-gray-700 mb-2"><strong>Name:</strong> {userInfo.name}</p>
-              <p className="text-lg text-gray-700 mb-2"><strong>Phone:</strong> {userInfo.phone}</p>
-              <p className="text-lg text-gray-700 mb-2"><strong>Email:</strong> {userInfo.email}</p>
-              <p className="text-lg text-gray-700 mb-2"><strong>City:</strong> {userInfo.city}</p>
-              <p className="text-lg text-gray-700 mb-2"><strong>Age:</strong> {userInfo.age}</p>
-              <p className="text-lg text-gray-700 mb-2"><strong>Weight:</strong> {userInfo.weight} kg</p>
-              <p className="text-lg text-gray-700 mb-2"><strong>Height:</strong> {userInfo.height} cm</p>
-              <p className="text-lg text-gray-700 mb-2"><strong>Gender:</strong> {userInfo.gender}</p>
-              <p className="text-lg text-gray-700 mb-2"><strong>Allergies:</strong> {userInfo.allergies}</p>
-              <p className="text-lg text-gray-700 mb-2"><strong>Past Illnesses:</strong> {userInfo.pastIllnesses}</p>
-              <p className="text-lg text-gray-700 mb-2"><strong>Current Medication:</strong> {userInfo.currentMedication}</p>
+              <p className="text-lg text-gray-700 mb-2">
+                <strong>Name:</strong> {userInfo.name}
+              </p>
+              <p className="text-lg text-gray-700 mb-2">
+                <strong>Phone:</strong> {userInfo.phone}
+              </p>
+              <p className="text-lg text-gray-700 mb-2">
+                <strong>Email:</strong> {userInfo.email}
+              </p>
+              <p className="text-lg text-gray-700 mb-2">
+                <strong>City:</strong> {userInfo.city}
+              </p>
+              <p className="text-lg text-gray-700 mb-2">
+                <strong>Age:</strong> {userInfo.age}
+              </p>
+              <p className="text-lg text-gray-700 mb-2">
+                <strong>Weight:</strong> {userInfo.weight} kg
+              </p>
+              <p className="text-lg text-gray-700 mb-2">
+                <strong>Height:</strong> {userInfo.height} cm
+              </p>
+              <p className="text-lg text-gray-700 mb-2">
+                <strong>Gender:</strong> {userInfo.gender}
+              </p>
+              <p className="text-lg text-gray-700 mb-2">
+                <strong>Allergies:</strong> {userInfo.allergies}
+              </p>
+              <p className="text-lg text-gray-700 mb-2">
+                <strong>Past Illnesses:</strong> {userInfo.illness}
+              </p>
+              <p className="text-lg text-gray-700 mb-2">
+                <strong>Current Medication:</strong> {userInfo.medication}
+              </p>
             </div>
             <button
               type="button"

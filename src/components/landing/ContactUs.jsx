@@ -5,7 +5,7 @@ import BackgroundAnimation from "../../animations/BackgroundAnimation";
 const ContactUs = () => {
   return (
     <section id="contact-us" className="relative py-16 bg-gradient-to-b from-blue-50 to-blue-100 text-center">
-      <BackgroundAnimation sectionId="contact-us" />
+      <BackgroundAnimation sectionId="contact-us" className="-z-0"/>
       <div className="max-w-7xl mx-auto px-6 lg:px-12">
         <h2 className="text-5xl font-bold text-blue-600 font-cursive mb-8">Contact Us</h2>
         <p className="text-2xl text-gray-700 mb-12">

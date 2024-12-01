@@ -1,11 +1,11 @@
 import React, { useState } from "react";
 import axios from "axios";
 
+axios.defaults.baseURL = "http://localhost:8080"
+
 const BookAppointment = () => {
   const [appointment, setAppointment] = useState({
-    name: "",
     email: "",
-    phone: "",
     date: "",
     time: "",
     location: "",
@@ -19,13 +19,16 @@ const BookAppointment = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      await axios.post("/api/appointments", appointment);
+      const response = await axios.post("/appointmentdetail", appointment);
+      console.log("RESPONSE: ", response.data);
       alert("Appointment booked successfully!");
     } catch (error) {
       console.error(error);
       alert("Failed to book appointment.");
     }
   };
+
+  console.log("APPOINTMENT: ", appointment)
 
   return (
     <div className="min-h-screen bg-white p-8">
@@ -36,8 +39,8 @@ const BookAppointment = () => {
         onSubmit={handleSubmit}
         className="bg-primary-100 p-6 rounded-lg shadow-md space-y-6"
       >
-        <div>
-          <label className="block text-primary-400 font-semibold mb-2">
+        {/*<div>
+           <label className="block text-primary-400 font-semibold mb-2">
             Name
           </label>
           <input
@@ -48,7 +51,7 @@ const BookAppointment = () => {
             className="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary-300"
             placeholder="Enter your name"
           />
-        </div>
+        </div> */}
         <div>
           <label className="block text-primary-400 font-semibold mb-2">
             Email
@@ -62,7 +65,7 @@ const BookAppointment = () => {
             placeholder="Enter your email"
           />
         </div>
-        <div>
+        {/* <div>
           <label className="block text-primary-400 font-semibold mb-2">
             Phone
           </label>
@@ -74,7 +77,7 @@ const BookAppointment = () => {
             className="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary-300"
             placeholder="Enter your phone number"
           />
-        </div>
+        </div> */}
         <div>
           <label className="block text-primary-400 font-semibold mb-2">
             Date
