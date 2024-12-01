@@ -2,6 +2,8 @@
 import React from "react";
 import { FaBullseye } from "react-icons/fa";
 import BackgroundAnimation from "../../animations/BackgroundAnimation";
+import indiandnaresearch from "../../assets/indian-dna-research.png";
+import dnastrands from "../../assets/dna-strands.png"
 
 const AboutUs = () => {
   const handleMouseMove = (e, imgRef) => {
@@ -40,7 +42,7 @@ const AboutUs = () => {
           >
             <img
               ref={firstImageRef}
-              src="/images/indian-dna-research.png"
+              src={indiandnaresearch}
               alt="Indian DNA Research"
               className="rounded-lg shadow-lg transition-transform duration-200"
               style={{ width: "auto", height: "auto", maxWidth: "100%", maxHeight: "500px" }}
@@ -79,7 +81,7 @@ const AboutUs = () => {
           >
             <img
               ref={secondImageRef}
-              src="/images/dna-strands.png"
+              src={dnastrands}
               alt="DNA Strands"
               className="rounded-lg shadow-lg transition-transform duration-200"
               style={{ width: "auto", height: "auto", maxWidth: "100%", maxHeight: "500px" }}
