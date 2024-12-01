@@ -1,6 +1,11 @@
 import React, { useState } from "react";
+import axios from "axios";
+
+
 
 const Symptoms = () => {
+
+  
   const symptomsList = [
     "Chest pain", "Pain in arm or jaw", "Shortness of breath", "Wheezing",
     "Coughing", "Excessive thirst", "Frequent urination", "Fatigue",
@@ -13,11 +18,14 @@ const Symptoms = () => {
 
   const [selectedSymptoms, setSelectedSymptoms] = useState([]);
   const [city, setCity] = useState("");
-  const [drink, setDrink] = useState("");
-  const [smoke, setSmoke] = useState("");
-  const [diet, setDiet] = useState("");
-  const [sleepDuration, setSleepDuration] = useState("");
-  const [exerciseHours, setExerciseHours] = useState("");
+  const [cityError, setCityError] = useState(false);
+  const [drink, setDrink] = useState('');
+  const [smoke, setSmoke] = useState('');
+  const [diet, setDiet] = useState('');
+  const [sleepDuration, setSleepDuration] = useState('');
+  const [exerciseHours, setExerciseHours] = useState('');
+  const [fileUrl, setFileUrl] = useState(null);
+  const [loading, setLoading] = useState(false);
 
   const handleCheckboxChange = (event) => {
     const { value, checked } = event.target;
@@ -28,18 +36,47 @@ const Symptoms = () => {
     }
   };
 
-  const handleSubmit = () => {
-    if (city) {
-      alert(`Selected Symptoms: ${selectedSymptoms.join(", ")}
-City: ${city}
-Drink: ${drink}
-Smoke: ${smoke}
-Diet/Nutrition: ${diet}
-Sleep Duration: ${sleepDuration} hours
-Exercise: ${exerciseHours} hours per week`);
-    } else {
+  const handleSubmit = async () => {
+    if (cityError || !city) {
       alert("Please enter a valid city.");
+      return;
     }
+
+    const requestData = {
+      symptoms: selectedSymptoms,
+      city,
+      drink,
+      smoke,
+      diet,
+      sleepDuration,
+      exerciseHours
+    };
+
+    setLoading(true);  // Show loading indicator
+
+    try {
+      const response = await axios.post("http://localhost:5000/diagnosis", requestData);
+
+      if (response.data.file_url) {
+        setFileUrl(response.data.file_url);
+      } else {
+        alert("PDF generation failed.");
+      }
+    } catch (error) {
+      alert("An error occurred while processing your request.");
+      console.error(error);
+    } finally {
+      setLoading(false);  // Hide loading indicator
+    }
+  };
+
+  const handleDownload = () => {
+    const link = document.createElement('a');
+    link.href = fileUrl;
+    link.download = 'personalized_health_report.pdf';
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
   };
 
   return (

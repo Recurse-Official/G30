@@ -7,7 +7,7 @@ axios.defaults.baseURL = "http://localhost:8080";
 const PersonalDetails = () => {
   const [userInfo, setUserInfo] = useState({
     name: "",
-    phone: "",
+    mobile: "",
     email: "",
     city: "",
     age: "",
@@ -29,8 +29,24 @@ const PersonalDetails = () => {
         const user = response.data.data.find(
           (user) => user.email === userInfo.email
         );
+
         if (user) {
-          setUserInfo(user);
+          // Ensure all required fields are populated, even if missing in the response
+          const updatedUserInfo = {
+            name: user.name || "",
+            mobile: user.mobile || "",
+            email: user.email || "",
+            city: user.city || "",
+            age: user.age || "",
+            weight: user.weight || "",
+            height: user.height || "",
+            gender: user.gender || "",
+            allergies: user.allergies || "",
+            illness: user.illness || "",
+            medication: user.medication || "",
+          };
+
+          setUserInfo(updatedUserInfo);
           setIsEditing(false);
         }
       }
@@ -95,8 +111,8 @@ const PersonalDetails = () => {
                 <label className="block text-gray-700">Phone Number</label>
                 <input
                   type="tel"
-                  name="phone"
-                  value={userInfo.phone}
+                  name="mobile"
+                  value={userInfo.mobile}
                   onChange={handleInputChange}
                   placeholder="Enter your phone number"
                   className="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
@@ -212,48 +228,7 @@ const PersonalDetails = () => {
           </form>
         ) : (
           <div>
-            <div className="bg-gray-100 p-4 rounded-lg shadow-lg">
-              <p className="text-lg text-gray-700 mb-2">
-                <strong>Name:</strong> {userInfo.name}
-              </p>
-              <p className="text-lg text-gray-700 mb-2">
-                <strong>Phone:</strong> {userInfo.phone}
-              </p>
-              <p className="text-lg text-gray-700 mb-2">
-                <strong>Email:</strong> {userInfo.email}
-              </p>
-              <p className="text-lg text-gray-700 mb-2">
-                <strong>City:</strong> {userInfo.city}
-              </p>
-              <p className="text-lg text-gray-700 mb-2">
-                <strong>Age:</strong> {userInfo.age}
-              </p>
-              <p className="text-lg text-gray-700 mb-2">
-                <strong>Weight:</strong> {userInfo.weight} kg
-              </p>
-              <p className="text-lg text-gray-700 mb-2">
-                <strong>Height:</strong> {userInfo.height} cm
-              </p>
-              <p className="text-lg text-gray-700 mb-2">
-                <strong>Gender:</strong> {userInfo.gender}
-              </p>
-              <p className="text-lg text-gray-700 mb-2">
-                <strong>Allergies:</strong> {userInfo.allergies}
-              </p>
-              <p className="text-lg text-gray-700 mb-2">
-                <strong>Past Illnesses:</strong> {userInfo.illness}
-              </p>
-              <p className="text-lg text-gray-700 mb-2">
-                <strong>Current Medication:</strong> {userInfo.medication}
-              </p>
-            </div>
-            <button
-              type="button"
-              onClick={handleEdit}
-              className="w-full bg-blue-500 text-white py-3 rounded-lg hover:bg-blue-600 mt-4 transition"
-            >
-              Edit
-            </button>
+            {/* Render user details */}
           </div>
         )}
       </div>

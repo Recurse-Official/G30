@@ -8,13 +8,13 @@ import { useAuth0 } from "@auth0/auth0-react";
 const App = () => {
   const { user, isAuthenticated } = useAuth0();
 
-  const ProtectedRoute = ({ children }) => {
-    if (!isAuthenticated || user?.name !== "Vrishank Warrier") {
-      alert("Only Admins can Login");
-      return <Navigate to="/" />;
-    }
-    return children;
-  };
+  // const ProtectedRoute = ({ children }) => {
+  //   if (!isAuthenticated || user?.name !== "omniflux") {
+  //     alert("Only Admins can Login");
+  //     return <Navigate to="/" />;
+  //   }
+  //   return children;
+  // };
 
   return (
     <Router>
@@ -24,9 +24,9 @@ const App = () => {
         <Route
           path="/admin"
           element={
-            <ProtectedRoute>
+            // <ProtectedRoute>
               <AdminDashboard />
-            </ProtectedRoute>
+            // </ProtectedRoute>
           }
         />
       </Routes>

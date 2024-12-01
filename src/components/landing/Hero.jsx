@@ -63,15 +63,6 @@ const Hero = () => {
               Login
             </button>
           </LoginButton>
-
-          {/* Logout Button */}
-          <LogoutButton>
-            <button
-              className="bg-red-500 text-white px-6 py-3 rounded-lg shadow-lg hover:bg-red-600 hover:scale-105 transition duration-300 ease-in-out"
-            >
-              Logout
-            </button>
-          </LogoutButton>
         </div>
       </div>
 

@@ -7,7 +7,7 @@ const LoginButton = () => {
   const handlelogin =() =>{
     loginWithRedirect({ appState:{returnTo: "/dashboard"}});
   };
-  return <button onClick={handlelogin}>Log In</button>;
+  return <button onClick={handlelogin}>Get Started</button>;
 };
 
 export default LoginButton;
