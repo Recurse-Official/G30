@@ -1,25 +1,30 @@
-import logo from './logo.svg';
-import './App.css';
+import React from "react";
+import { Routes, Route, Navigate } from "react-router-dom";
+import LandingPage from "./pages/LandingPage";
+import Dashboard from "./pages/Dashboard";
+import AdminDashboard from "./pages/AdminDashboard";
+import { useAuth0 } from "@auth0/auth0-react";
 
-function App() {
+const App = () => {
+  const {user, isAuthenticated} = useAuth0();
+
+  const ProtectedRoute = ({ children }) => {
+    if (!isAuthenticated || user?.name !== "Vrishank Warrier") {
+      alert("Only Admins can Login");
+      return <Navigate to="/dashboard" />;
+    }
+    return children;
+  };
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Routes>
+      <Route path="/" element={<LandingPage />} />
+      <Route path="/dashboard" element={<Dashboard />} />
+      <Route path="/admin" element={
+        <ProtectedRoute>
+          <AdminDashboard />
+        </ProtectedRoute>} />
+    </Routes>
   );
-}
+};
 
 export default App;
