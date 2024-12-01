@@ -1,38 +1,37 @@
 import React from "react";
 import { useAuth0 } from "@auth0/auth0-react";
-import LogoutButton from "../auth0/LogoutButton";
-import LoginButton from "../auth0/LoginButton";
+import omnifluxLogo from "../../assets/omniflux-logo-cropped.png";
 
 const Navbar = () => {
-  const { user, isAuthenticated, isLoading } = useAuth0();
-
-  if (isLoading) {
-    return <div className="text-center text-blue-500">Loading...</div>;
-  }
-
- 
+  const { user, isAuthenticated } = useAuth0();
 
   return (
-    <nav className="bg-blue-600 text-white py-4 px-6 flex justify-between items-center shadow-md">
-      <h1 className="text-xl font-bold">Dashboard Panel</h1>
+    <nav className="bg-lightblue-600 text-white py-2 px-6 shadow-md flex items-center justify-between">
+      {/* Logo and Dashboard Text */}
+      <div className="flex items-center space-x-4">
+        <img
+          src={omnifluxLogo}
+          alt="Omniflux Logo"
+          className="w-12 h-12" // Adjust logo size
+        />
+        <h2 className="text-2xl text-white font-bold">Omniflux</h2>
+      </div>
 
+      {/* User Info or Login Prompt */}
       {isAuthenticated && user ? (
         <div className="flex items-center space-x-4">
-          {user.picture && (
-            <img
-              src={user.picture}
-              alt={user.name || "User"}
-              className="w-10 h-10 rounded-full border-2 border-white"
-            />
-          )}
+          <img
+            src={user.picture}
+            alt={user.name}
+            className="w-10 h-10 rounded-full"
+          />
           <div>
-            <h2 className="text-sm font-medium">{user.name || "User"}</h2>
-            <p className="text-xs">{user.email || "No Email Available"}</p>
+            <h2 className="text-sm font-medium">{user.name}</h2>
+            <p className="text-xs">{user.email}</p>
           </div>
-          <LogoutButton />
         </div>
       ) : (
-        <LoginButton />
+        <p className="text-sm">Please log in.</p>
       )}
     </nav>
   );

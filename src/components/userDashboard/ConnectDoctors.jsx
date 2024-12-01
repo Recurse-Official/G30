@@ -13,58 +13,20 @@ const doctorsData = [
 ];
 
 const ConnectDoctors = () => {
-  const [searchTerm, setSearchTerm] = useState("");
-
-  const handleSearchChange = (event) => {
-    setSearchTerm(event.target.value);
-  };
-
-  const filteredDoctors = doctorsData.filter((doctor) =>
-    doctor.specialty.toLowerCase().includes(searchTerm.toLowerCase())
-  );
-
-  const handleBookAppointment = (doctorName) => {
-    alert(`Appointment booked with ${doctorName}`);
-  };
-
   return (
     <div className="min-h-screen bg-white p-8">
-      <h2 className="text-3xl font-bold text-blue-600 mb-6">Connect with Doctors</h2>
-
-      {/* Search Field */}
-      <div className="mb-6">
-        <input
-          type="text"
-          value={searchTerm}
-          onChange={handleSearchChange}
-          placeholder="Search by Disease"
-          className="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
-        />
-      </div>
-
-      {/* Doctors Grid */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-        {filteredDoctors.length > 0 ? (
-          filteredDoctors.map((doctor) => (
-            <div
-              key={doctor.id}
-              className="bg-gray-100 rounded-lg shadow-lg p-6 flex flex-col items-center"
-            >
-              <h3 className="text-xl font-semibold text-blue-600 mb-2">{doctor.name}</h3>
-              <p className="text-gray-700 mb-4">{doctor.specialty}</p>
-              <button
-                onClick={() => handleBookAppointment(doctor.name)}
-                className="bg-blue-500 text-white py-2 px-4 rounded-lg hover:bg-blue-600 transition w-full"
-              >
-                Book Appointment
-              </button>
-            </div>
-          ))
-        ) : (
-          <div className="col-span-full text-center">
-            <p className="text-gray-500">No doctors found for your search.</p>
+      <h2 className="text-3xl font-bold text-blue-600 mb-8">Connect with Doctors</h2>
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        {doctors.map((doctor) => (
+          <div key={doctor.id} className="p-6 bg-gray-100 rounded-lg shadow-lg hover:shadow-xl transition-shadow duration-300">
+            <h3 className="text-xl font-semibold text-gray-800">{doctor.name}</h3>
+            <p className="text-gray-600">Specialization: {doctor.specialization}</p>
+            <p className="text-gray-600">Email: {doctor.email}</p>
+            <button className="mt-4 bg-blue-500 text-white px-4 py-2 rounded-lg hover:bg-blue-600 transition">
+              Contact
+            </button>
           </div>
-        )}
+        ))}
       </div>
     </div>
   );

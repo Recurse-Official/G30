@@ -5,8 +5,8 @@ import { FaUser, FaCalendarAlt, FaListAlt, FaUserMd, FaFileAlt } from "react-ico
 const Sidebar = () => {
   return (
     <div className="w-64 bg-050c9c text-white min-h-screen flex flex-col">
-      <h2 className="text-2xl font-bold text-center py-6">Dashboard</h2>
-      <nav className="flex-grow">
+        <h2 className="text-2xl font-bold text-center text-white py-6">Dashboard</h2>
+        <nav className="flex-grow">
         <ul className="space-y-4 px-6">
           <li>
             <Link className="flex items-center gap-4 hover:text-a7e6ff transition" to="/personal-details">
