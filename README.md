@@ -1,12 +1,11 @@
 ## Table of Contents
 - [Introduction](#introduction)
 - [Features](#features)
-- [Folder Structure](#folder-structure)
+- [Technologies Used](#technologies-used)
+- [Key Components](#key-components)
 - [Installation](#installation)
 - [Usage](#usage)
-- [Technologies Used](#technologies-used)
-- [Contributing](#contributing)
-- [License](#license)
+
 
 ---
 
