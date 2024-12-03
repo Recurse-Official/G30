@@ -1,70 +1,98 @@
-# Getting Started with Create React App
+## Table of Contents
+- [Introduction](#introduction)
+- [Features](#features)
+- [Folder Structure](#folder-structure)
+- [Installation](#installation)
+- [Usage](#usage)
+- [Technologies Used](#technologies-used)
+- [Contributing](#contributing)
+- [License](#license)
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+---
 
-## Available Scripts
+## Introduction
 
-In the project directory, you can run:
+This frontend project is a React-based web application designed for user interaction, dashboard management, and administrative functionality. It features modular components and a clean folder structure for scalability and maintenance.
 
-### `npm start`
+---
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+## Features
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+- **Landing Page**: Includes a hero section, about us, services, labs, and contact information.
+- **User Dashboard**: Enables users to:
+  - Book appointments.
+  - Connect with doctors.
+  - Manage personal details and medical history.
+  - Input symptoms for analysis.
+- **Admin Dashboard**: Provides features for administrative users, including navigation and doctor management.
 
-### `npm test`
+---
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
 
-### `npm run build`
+## Technologies Used
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+- **React.js**: Frontend framework for building user interfaces.
+- **React Router**: For managing navigation and routes.
+- **Auth0**: For authentication and authorization (optional, as per your `App.js` code).
+- **TailwindCSS**: Utility-first CSS framework for styling.
+- **JavaScript (ES6+)**: Language for writing React components.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+---
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+### Key Components
 
-### `npm run eject`
+1. **Landing Page (`components/landing/`)**
+   - Hero Section
+   - About Us
+   - Services Offered
+   - Labs Information
+   - Contact Form/Details
+   - Footer and Navbar for navigation
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+2. **User Dashboard (`components/userDashboard/`)**
+   - Book Appointments
+   - Connect with Doctors
+   - Manage Personal Details and History
+   - Input Symptoms for Analysis
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+3. **Admin Dashboard (`components/admin/`)**
+   - Navigation (Sidebar)
+   - Doctor Management and Admin Actions
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+---
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+## Installation
 
-## Learn More
+1. Clone the repository:
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+  `git clone https://github.com/[your-username]/[your-repository].git`
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+3. Navigate to the project directory:
 
-### Code Splitting
+  `cd [your-repository]`
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+3. Install dependencies:
 
-### Analyzing the Bundle Size
+  `npm install`
+  
+4. Start the development server:
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+  `npm start`
 
-### Making a Progressive Web App
+## Usage
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+**Development**
+Run the project locally by starting the development server:
+`npm start`
+Access the app at http://localhost:3000.
 
-### Advanced Configuration
+**Build for Production*
+Create a production build:
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+`npm run build`
 
-### Deployment
+---
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
 
-### `npm run build` fails to minify
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+
