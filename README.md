@@ -85,7 +85,7 @@ Run the project locally by starting the development server:
 `npm start`
 Access the app at http://localhost:3000.
 
-**Build for Production*
+**Build for Production**
 Create a production build:
 
 `npm run build`
